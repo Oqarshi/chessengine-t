@@ -12,12 +12,12 @@
 	    });
     </script> 
       <style type="text/css">
-	      body {
+body {
   background-color: #f2f2f2;
   font-family: Arial, sans-serif;
 }
 
-button {
+.button {
   padding: 10px 20px;
   font-size: 16px;
   background-color: #4caf50;
@@ -27,28 +27,28 @@ button {
   border-radius: 4px;
 }
 
-button:hover {
+.button:hover {
   background-color: #45a049;
 }
 
-select {
+.select {
   padding: 5px;
   font-size: 16px;
   border-radius: 4px;
 }
 
-input[type="text"] {
+.input-text {
   padding: 5px;
   font-size: 16px;
   border-radius: 4px;
 }
 
-a {
+.link {
   color: #0066cc;
   text-decoration: none;
 }
 
-a:hover {
+.link:hover {
   text-decoration: underline;
 }
 
@@ -89,6 +89,19 @@ p {
   margin-bottom: 20px;
 }
 
+/* Styling for specific buttons */
+#newGameButton {
+  background-color: #007bff;
+}
+
+#undoButton {
+  background-color: #dc3545;
+}
+
+#analysisButton {
+  background-color: #ffc107;
+}
+
           #FenTextBox {
               width: 400px;
           }
@@ -115,20 +128,20 @@ p {
   <body> 
     <div align="center">
         <div>
-            <a href="javascript:UINewGame()">New game</a>
+            <a href="javascript:UINewGame()" id="newGameButton">New game</a>
             <select onchange="javascript:UIChangeStartPlayer()">
                 <option value="white">White</option>
                 <option value="black">Black</option>
             </select>
             Time per move: <input id="TimePerMove" value="3000" onchange="javascript:UIChangeTimePerMove()" />ms
-            <a href="javascript:UIUndoMove()">Undo</a>
+            <a href="javascript:UIUndoMove()" id="undoButton">Undo</a>
         </div>
         <div style="margin-top:5px;">
         <div id='board'></div> 
         <span id='output'></span><br/> 
 	    <textarea cols='50' rows='6' id='PgnTextBox'></textarea><br/>
         <div>
-            <a id='AnalysisToggleLink' href="javascript:UIAnalyzeToggle()">Analysis: Off</a>
+            <a id='AnalysisToggleLink' href="javascript:UIAnalyzeToggle()" id="analysisButton">Analysis: Off</a>
         </div>
         FEN: <input id='FenTextBox' onchange="javascript:UIChangeFEN()"/>
         </div>
