@@ -135,26 +135,26 @@
   <body> 
     <div align="center">
         <div>
-            <button class="btn btn-primary" onclick="UINewGame()">New game</button>
+            <button class="alert alert-success" onclick="UINewGame()"><strong>New Game</strong></button>
             <select class="form-select" onchange="UIChangeStartPlayer()">
                 <option value="white">White</option>
                 <option value="black">Black</option>
             </select>
-            Time per move: <input id="TimePerMove" class="form-control" value="3000" onchange="UIChangeTimePerMove()" />ms
-            <a href="javascript:UIUndoMove()" class="btn btn-danger">Undo</a>
+            Time per move: <input id="TimePerMove" class="form-control" value="3000" onchange="UIChangeTimePerMove()" /> ms
+          <a href="javascript:UIUndoMove()" class="alert alert-danger"><strong>Undo</strong></a>
         </div>
         <div style="margin-top:5px;">
         <div id='board'></div> 
         <span id='output'></span><br/> 
         <textarea cols='50' rows='6' id='PgnTextBox' class='form-control'></textarea><br/>
         <div>
-            <a id='AnalysisToggleLink' href="javascript:UIAnalyzeToggle()" class="btn btn-warning">Analysis: Off</a>
+            <a id='AnalysisToggleLink' href="javascript:UIAnalyzeToggle()" class="alert alert-info"><strong>Analysis: Off</strong></a>
         </div>
         FEN: <input id='FenTextBox' onchange="UIChangeFEN()" class="form-control"/>
         </div>
         <div>
         <h2>About</h2>
-        <p>Can beat stockfish 15.1, 32% of the time. 164/500 times, (0.1 sec per move).</p>
+        <p><strong>Can beat stockfish 15.1, 32% of the time. 164/500 times, (0.1 sec per move).</strong></p>
         </div>
      </div> 
      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js" integrity="sha512-+jatvFvh6GnnA9FDKeV7x6y5C6BsR/3VyoFZUuHdLrkNNXyWvUmWpX00uz3Vf4YskHX9X/ADTS05s+qoN25f6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
