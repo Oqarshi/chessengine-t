@@ -1,112 +1,172 @@
 <html>
   <head>
     <title>Chessler Engine V2</title>
-    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui-1.8.24.custom.min.js"></script>
-    <script type="text/javascript" src="js/garbochess.js"></script>
-    <script type="text/javascript" src="js/boardui.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        g_timeout = 1000;
-        UINewGame();
-      });
-    </script>
     <style type="text/css">
+      #FenTextBox {
+        width: 400px;
+      }
+
+      #TimePerMove {
+        width: 50px;
+      }
+
+      .no-highlight {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+
+      .sprite-bishop_black {
+        background-position: 0 0;
+        width: 45px;
+        height: 45px;
+      }
+
+      .sprite-bishop_white {
+        background-position: 0 -95px;
+        width: 45px;
+        height: 45px;
+      }
+
+      .sprite-king_black {
+        background-position: 0 -190px;
+        width: 45px;
+        height: 45px;
+      }
+
+      .sprite-king_white {
+        background-position: 0 -285px;
+        width: 45px;
+        height: 45px;
+      }
+
+      .sprite-knight_black {
+        background-position: 0 -380px;
+        width: 45px;
+        height: 45px;
+      }
+
+      .sprite-knight_white {
+        background-position: 0 -475px;
+        width: 45px;
+        height: 45px;
+      }
+
+      .sprite-pawn_black {
+        background-position: 0 -570px;
+        width: 45px;
+        height: 45px;
+      }
+
+      .sprite-pawn_white {
+        background-position: 0 -665px;
+        width: 45px;
+        height: 45px;
+      }
+
+      .sprite-queen_black {
+        background-position: 0 -760px;
+        width: 45px;
+        height: 45px;
+      }
+
+      .sprite-queen_white {
+        background-position: 0 -855px;
+        width: 45px;
+        height: 45px;
+      }
+
+      .sprite-rook_black {
+        background-position: 0 -950px;
+        width: 45px;
+        height: 45px;
+      }
+
+      .sprite-rook_white {
+        background-position: 0 -1045px;
+        width: 45px;
+        height: 45px;
+      }
+
+      /* Additional CSS */
       body {
         font-family: Arial, sans-serif;
-        background-color: #f2f2f2;
       }
 
       div.container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
+        text-align: center;
       }
 
-      h2 {
-        margin-top: 0;
+      div.game-controls {
+        margin-bottom: 10px;
       }
 
-      a {
-        color: #337ab7;
+      a.button {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: #f0f0f0;
         text-decoration: none;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      select {
-        padding: 5px;
-        border: 1px solid #ccc;
+        color: #333;
         border-radius: 3px;
+        margin-right: 5px;
       }
 
-      input[type="text"],
-      textarea {
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
+      select.start-player {
+        margin-left: 10px;
+      }
+
+      input#TimePerMove {
+        margin-left: 5px;
+      }
+
+      a.undo-link {
+        margin-left: 10px;
+      }
+
+      div#board {
+        margin-top: 10px;
+      }
+
+      textarea#PgnTextBox {
         width: 100%;
-        box-sizing: border-box;
-        resize: none;
+        margin-top: 10px;
       }
 
-      #board {
+      div.analysis-toggle {
+        margin-top: 10px;
+      }
+
+      input#FenTextBox {
+        margin-top: 10px;
+        width: 100%;
+      }
+
+      div.about {
         margin-top: 20px;
-      }
-
-      #output {
-        font-weight: bold;
-        margin-top: 10px;
-        display: inline-block;
-      }
-
-      #PgnTextBox {
-        margin-top: 10px;
-      }
-
-      #AnalysisToggleLink {
-        display: inline-block;
-        margin-top: 10px;
-        color: #337ab7;
-      }
-
-      #FenTextBox {
-        margin-top: 10px;
-        width: 100%;
-        box-sizing: border-box;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div>
-        <a href="javascript:UINewGame()">New game</a>
-        <select onchange="javascript:UIChangeStartPlayer()">
+      <div class="game-controls">
+        <a class="button" href="javascript:UINewGame()">New game</a>
+        <select class="start-player" onchange="javascript:UIChangeStartPlayer()">
           <option value="white">White</option>
           <option value="black">Black</option>
         </select>
         Time per move:
         <input id="TimePerMove" value="3000" onchange="javascript:UIChangeTimePerMove()" />ms
-        <a href="javascript:UIUndoMove()">Undo</a>
+        <a class="undo-link" href="javascript:UIUndoMove()">Undo</a>
       </div>
-      <div>
-        <div id="board"></div>
-        <span id="output"></span><br />
-        <textarea cols="50" rows="6" id="PgnTextBox"></textarea><br />
-        <div>
-          <a id="AnalysisToggleLink" href="javascript:UIAnalyzeToggle()">Analysis: Off</a>
-        </div>
-        FEN: <input id="FenTextBox" onchange="javascript:UIChangeFEN()" />
+      <div id="board"></div>
+      <span id="output"></span><br />
+      <textarea cols="50" rows="6" id="PgnTextBox"></textarea><br />
+      <div class="analysis-toggle">
+        <a id="AnalysisToggleLink" href="javascript:UIAnalyzeToggle()">Analysis: Off</a>
       </div>
-      <div>
+      FEN: <input id="FenTextBox" onchange="javascript:UIChangeFEN()" />
+      <div class="about">
         <h2>About</h2>
-        <p>
-          Can beat stockfish 15.1, 32% of the time. 164/500 times, (0.1 sec per move).
-        </p>
+        <p>Can beat Stockfish 15.1, 32% of the time. 164/500 times, (0.1 sec per move).</p>
       </div>
     </div>
   </body>
 </html>
-
