@@ -1,107 +1,114 @@
 <html> 
   <head> 
     <title>Chessler Engine V2</title> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css" integrity="sha512-9W3h3HdTIv4kxQojzjfFv/5JRY23ayjQZq30i3qrOTBnrUwHhzZggrvjS/9mMTVEhigpp6t0Ju0Byz3xFSmtOw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script> 
     <script type="text/javascript" src="js/jquery-ui-1.8.24.custom.min.js"></script> 
     <script type="text/javascript" src="js/garbochess.js"></script>
-	<script type="text/javascript" src="js/boardui.js"></script>
-	<script type="text/javascript">
-	    $(document).ready(function () {
-	        g_timeout = 1000;
-	        UINewGame();
-	    });
+    <script type="text/javascript" src="js/boardui.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            g_timeout = 1000;
+            UINewGame();
+        });
     </script> 
-      <style type="text/css">
-body {
-  background-color: #f2f2f2;
-  font-family: Arial, sans-serif;
-}
-
-.button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.button:hover {
-  background-color: #45a049;
-}
-
-.select {
-  padding: 5px;
-  font-size: 16px;
-  border-radius: 4px;
-}
-
-.input-text {
-  padding: 5px;
-  font-size: 16px;
-  border-radius: 4px;
-}
-
-.link {
-  color: #0066cc;
-  text-decoration: none;
-}
-
-.link:hover {
-  text-decoration: underline;
-}
-
-#board {
-  margin-top: 10px;
-}
-
-#AnalysisToggleLink {
-  color: #0066cc;
-  text-decoration: none;
-}
-
-#AnalysisToggleLink:hover {
-  text-decoration: underline;
-}
-
-#FenTextBox {
-  width: 400px;
-}
-
-#TimePerMove {
-  width: 50px;
-}
-
-#PgnTextBox {
-  width: 400px;
-}
-
-h2 {
-  color: #333;
-  font-size: 24px;
-  margin-top: 20px;
-}
-
-p {
-  color: #666;
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-/* Styling for specific buttons */
-#newGameButton {
-  background-color: #007bff;
-}
-
-#undoButton {
-  background-color: #dc3545;
-}
-
-#analysisButton {
-  background-color: #ffc107;
-}
-
+    <style type="text/css">
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+        
+        button {
+            font-size: 16px;
+        }
+        
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+        
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+        
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+        
+        .btn-warning:hover {
+            background-color: #e0a800;
+            border-color: #d39e00;
+        }
+        
+        select {
+            padding: 5px;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+        
+        input[type="text"] {
+            padding: 5px;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+        
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        #board {
+            margin-top: 10px;
+        }
+        
+        #AnalysisToggleLink {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        #AnalysisToggleLink:hover {
+            text-decoration: underline;
+        }
+        
+        #FenTextBox {
+            width: 400px;
+        }
+        
+        #TimePerMove {
+            width: 50px;
+        }
+        
+        #PgnTextBox {
+            width: 400px;
+        }
+        
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        
+        p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
           #FenTextBox {
               width: 400px;
           }
@@ -123,32 +130,33 @@ p {
           .sprite-queen_white{ background-position: 0 -855px; width: 45px; height: 45px; } 
           .sprite-rook_black{ background-position: 0 -950px; width: 45px; height: 45px; } 
           .sprite-rook_white{ background-position: 0 -1045px; width: 45px; height: 45px; }
-      </style>
+    </style>
   </head> 
   <body> 
     <div align="center">
         <div>
-            <a href="javascript:UINewGame()" id="newGameButton">New game</a>
-            <select onchange="javascript:UIChangeStartPlayer()">
+            <button class="btn btn-primary" onclick="UINewGame()">New game</button>
+            <select class="form-select" onchange="UIChangeStartPlayer()">
                 <option value="white">White</option>
                 <option value="black">Black</option>
             </select>
-            Time per move: <input id="TimePerMove" value="3000" onchange="javascript:UIChangeTimePerMove()" />ms
-            <a href="javascript:UIUndoMove()" id="undoButton">Undo</a>
+            Time per move: <input id="TimePerMove" class="form-control" value="3000" onchange="UIChangeTimePerMove()" />ms
+            <a href="javascript:UIUndoMove()" class="btn btn-danger">Undo</a>
         </div>
         <div style="margin-top:5px;">
         <div id='board'></div> 
         <span id='output'></span><br/> 
-	    <textarea cols='50' rows='6' id='PgnTextBox'></textarea><br/>
+        <textarea cols='50' rows='6' id='PgnTextBox' class='form-control'></textarea><br/>
         <div>
-            <a id='AnalysisToggleLink' href="javascript:UIAnalyzeToggle()" id="analysisButton">Analysis: Off</a>
+            <a id='AnalysisToggleLink' href="javascript:UIAnalyzeToggle()" class="btn btn-warning">Analysis: Off</a>
         </div>
-        FEN: <input id='FenTextBox' onchange="javascript:UIChangeFEN()"/>
+        FEN: <input id='FenTextBox' onchange="UIChangeFEN()" class="form-control"/>
         </div>
         <div>
-		<h2>About</h2>
-		<p>Can beat stockfish 15.1, 32% of the time. 164/500 times, (0.1 sec per move).</p>
-	</div>
+        <h2>About</h2>
+        <p>Can beat stockfish 15.1, 32% of the time. 164/500 times, (0.1 sec per move).</p>
+        </div>
      </div> 
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js" integrity="sha512-+jatvFvh6GnnA9FDKeV7x6y5C6BsR/3VyoFZUuHdLrkNNXyWvUmWpX00uz3Vf4YskHX9X/ADTS05s+qoN25f6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </body> 
-</html> 
+</html>
