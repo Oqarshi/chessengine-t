@@ -2473,7 +2473,7 @@ function SeeAddSliderAttacks(target, us, attacks, pieceType) {
 
 function BuildPVMessage(bestMove, value, timeTaken, ply) {
     var totalNodes = g_nodeCount + g_qNodeCount;
-    return "Ply:" + ply + " Score:" + value + " Nodes:" + totalNodes + " NPS:" + ((totalNodes / (timeTaken / 1000)) | 0) + " " + PVFromHash(bestMove, 15);
+    return "Depth:" + ply + " Score:" + (value / 100).toFixed(1) + " Nodes:" + totalNodes + " NPS:" + ((totalNodes / (timeTaken / 1000)) | 0) + " " + PVFromHash(bestMove, 15);
 }
 
 //////////////////////////////////////////////////
