@@ -468,7 +468,7 @@ function ScoreMove(move){
     var score;
     if (captured != 0) {
         var pieceType = piece & 0x7;
-        score = Math.abs(captured << 5 - Math.abs(pieceType));
+        score = captured << 5 - pieceType;
     } else {
         score = historyTable[piece & 0xF][moveTo];
     }
